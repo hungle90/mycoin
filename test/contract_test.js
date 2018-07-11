@@ -23,45 +23,33 @@ contract('Ownable', function (accounts) {
     });
   });
 
-  contract('StandardToken', function (accounts) {
-    it("should send coin correctly", async () => {
+contract('StandardToken', function (accounts) {
+  it("should send coin correctly", async () => {
 
-        // Get initial balances of first and second account.
-        let account_one = accounts[0];
-        let account_two = accounts[1];
+    // Get initial balances of first and second account.
+      let account_one = accounts[0];
+      let account_two = accounts[1];
 
-        let amount = 10;
-
-
-        let instance = await StandardToken.deployed();
-        let meta = instance;
-
-        let balance = await meta.balanceOf(account_one).call({from: account_one});
-        let account_one_starting_balance = balance.toNumber();
-
-        balance = await meta.balanceOf(account_two).call({from: account_two});
-        let account_two_starting_balance = balance.toNumber();
-        await meta.transferFrom(account_one_starting_balance, account_two_ending_balance, amount);
-
-        balance = await meta.balanceOf(account_one);
-        let account_one_ending_balance = balance.toNumber();
-
-        balance = await meta.balanceOf.call(account_two);
-        let account_two_ending_balance = balance.toNumber();
-
-        assert.equal(account_one_ending_balance, account_one_starting_balance - amount, "Amount wasn't correctly taken from the sender");
-        assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
-        });
-
-        it("should show the transfer event", function() {
-          var token;
-          return StandardToken.deployed().then(function(instance){
-            token = instance;
-            return token.transfer(accounts[1], 100000);
-          }).then(function(result){
-            console.log(result.logs[0].event)
-          })
-});
+      let amount = 10;
 
 
+      let instance = await StandardToken.deployed();
+      let meta = instance;
+
+      let balance = await meta.balanceOf(account_one).call({from: account_one});
+      let account_one_starting_balance = balance.toNumber();
+
+      balance = await meta.balanceOf(account_two).call({from: account_two});
+      let account_two_starting_balance = balance.toNumber();
+      await meta.transferFrom(account_one_starting_balance, account_two_ending_balance, amount);
+
+      balance = await meta.balanceOf(account_one);
+      let account_one_ending_balance = balance.toNumber();
+
+      balance = await meta.balanceOf.call(account_two);
+      let account_two_ending_balance = balance.toNumber();
+
+      assert.equal(account_one_ending_balance, account_one_starting_balance - amount, "Amount wasn't correctly taken from the sender");
+      assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
+      });
 });
